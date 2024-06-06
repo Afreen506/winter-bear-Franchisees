@@ -1,0 +1,62 @@
+{
+  "name": "my-react-app1",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "add": "^2.0.6",
+    "antd": "^5.13.2",
+    "antd-style": "^3.6.1",
+    "axios": "^1.6.5",
+    "bootstrap": "^5.3.2",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
+    "jspdf-invoice-template": "^1.4.4",
+    "moment": "^2.30.1",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.10.0",
+    "react-credit-cards-2": "^1.0.2",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.0.1",
+    "react-localization": "^1.0.19",
+    "react-multi-carousel": "^2.8.4",
+    "react-owl-carousel": "^2.3.3",
+    "react-razorpay": "^2.0.1",
+    "react-redux": "^9.1.0",
+    "react-router-dom": "^6.21.2",
+    "react-scripts": "^3.0.1",
+    "react-social-media-embed": "^2.5.9",
+    "redux": "^5.0.1",
+    "redux-thunk": "^2.4.2",
+    "semantic-ui-react": "^2.1.5",
+    "ua-parser-js": "^1.0.37",
+    "web-vitals": "^2.1.4",
+    "yarn": "^1.22.21"
+  },
+  "scripts": {
+    "start": "react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts --openssl-legacy-provider build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

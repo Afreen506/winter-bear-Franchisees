@@ -1,0 +1,297 @@
+@media only screen and (min-width: 1050px) and (max-width: 1280px) {
+  .first-div {
+    position: absolute;
+    left: 16.5%;
+    top: 64.8%;
+    width: 18.7%;
+    height: 6%;
+    z-index: 2;
+    background: transparent;
+  }
+
+  .second-div {
+    position: absolute;
+    left: 16%;
+    top: 75.25%;
+    width: 21%;
+    height: 7%;
+    z-index: 2;
+    background: transparent;
+  }
+
+  .image-div {
+    position: absolute;
+    left: 12.5%;
+    top: 20.25%;
+    width: 42%;
+    height: 40%;
+    z-index: 2;
+    background: transparent;
+  }
+}
+
+@media only screen and (min-width: 1376px) and (max-width: 1430px) {
+  .first-div {
+    position: absolute;
+    left: 19%;
+    top: 64.8%;
+    width: 18.7%;
+    height: 6%;
+    z-index: 2;
+    background: transparent;
+  }
+
+  .second-div {
+    position: absolute;
+    left: 19%;
+    top: 75.25%;
+    width: 21%;
+    height: 7%;
+    z-index: 2;
+    background: transparent;
+  }
+}
+
+@media only screen and (min-width: 1440px) and (max-width: 1600px) {
+  .first-div {
+    position: absolute;
+    left: 19%;
+    top: 64.7%;
+    width: 16.7%;
+    height: 6%;
+    z-index: 2;
+    background: transparent;
+
+  }
+
+  .second-div {
+    position: absolute;
+    left: 19%;
+    top: 75.2%;
+    width: 18%;
+    height: 7%;
+    z-index: 2;
+    background: transparent;
+  }
+}
+
+@media only screen and (min-width: 1601px) and (max-width: 1980px) {
+  .first-div {
+    position: absolute;
+    left: 35.35%;
+    top: 64.6%;
+    width: 16%;
+    height: 5.8%;
+    z-index: 2;
+    background: transparent;
+  }
+
+  .second-div {
+    position: absolute;
+    left: 34%;
+    top: 72.2%;
+    width: 19%;
+    height: 7%;
+    z-index: 2;
+    background: transparent;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 374px) {
+  .first-div {
+    position: absolute;
+    left: 12.88%;
+    top: 59.2%;
+    width: 40.7%;
+    height: 3.75%;
+    z-index: 2;
+    background: transparent;
+  }
+
+  .second-div {
+    position: absolute;
+    left: 12.88%;
+    top: 64%;
+    width: 42%;
+    height: 4%;
+    z-index: 2;
+    background: transparent;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 413px) {
+  .first-div {
+    position: absolute;
+    left: 12.25%;
+    top: 64.1%;
+    width: 41.5%;
+    height: 5.75%;
+    z-index: 2;
+    background: transparent;
+  }
+
+  .second-div {
+    position: absolute;
+    left: 11%;
+    top: 71.7%;
+    width: 45%;
+    height: 6.25%;
+    z-index: 2;
+    background: transparent;
+  }
+}
+
+@media only screen and (min-width: 414px) and (max-width: 425px) {
+  .first-div {
+    position: absolute;
+    left: 12.4%;
+    top: 64.3%;
+    width: 41.2%;
+    height: 5.5%;
+    z-index: 2;
+    background: transparent;
+  }
+
+  .second-div {
+    position: absolute;
+    left: 11%;
+    top: 71.56%;
+    width: 45%;
+    height: 6.5%;
+    z-index: 2;
+    background: transparent;
+  }
+}
+
+.first-div .months-row td {
+  text-align: center !important;
+  background: #fff;
+  text-align: center !important;
+  margin: 4px;
+  display: inline;
+  padding: 0 4.5px;
+  font-weight: 700;
+  font-size: 10px !important;
+}
+
+.dates-table tr td {
+  text-align: center !important;
+  margin: 3px;
+  display: inline;
+  padding: 0 5px;
+  font-size: 11px !important;
+  font-weight: bold;
+}
+
+.month-disp {
+  font-size: 20px;
+  background-color: #000000;
+
+}
+
+.mont-span {
+  background-color: white;
+  display: block;
+  margin: auto;
+  width: 90%;
+  border-radius: 20px;
+}
+
+.dates-table {
+  display: inline-block;
+  height: 65px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 100%;
+  margin-top: 2px;
+}
+
+.event-cont {
+  position: relative;
+}
+
+.event-content {
+  position: absolute;
+  right: 5%;
+  top: 28%;
+  width: 40%;
+  padding: 0% 2%;
+  background-color: white;
+  border-radius: 20px;
+  border: 5px solid #362a69;
+}
+
+
+.event-img {
+  position: relative;
+}
+
+.event-overlay {
+  position: absolute;
+  /* background-color: rgba(0, 0, 0 ,0.5); */
+  height: 480px;
+  left: 5%;
+  width: 450px;
+  top: 5%;
+}
+
+.message {
+  border-radius: 20px;
+  border: 3px solid black;
+  width: 35%;
+  text-align: center;
+  background-color: white;
+  padding: 2%;
+}
+
+
+@media only screen and (max-width:760px) {
+
+  .event-content {
+    position: relative;
+    width: 90%;
+    display: block !important;
+    margin: auto;
+    margin-top: 5%;
+    right: 0px;
+  }
+
+  .main-event-cont {
+    justify-content: center;
+  }
+
+  .event-banner {
+    width: 100%;
+    height: 35vh;
+    object-fit: cover;
+  }
+
+
+}
+
+
+@media only screen and (max-width:992px) {
+
+  .event-content {
+    position: relative;
+    width: 70%;
+    display: block !important;
+    margin: auto;
+    margin-top: 5%;
+    right: 0px;
+  }
+
+  .main-event-cont {
+    justify-content: center;
+  }
+
+  .event-banner {
+    width: 100%;
+    height: 35vh;
+    object-fit: cover;
+  }
+
+
+  
+
+}

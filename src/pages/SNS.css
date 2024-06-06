@@ -1,0 +1,122 @@
+.owl_wrapper {
+  width: 100vw;
+  overflow: hidden;
+}
+.owl_content {
+  padding-left: 12%;
+}
+.owl_wrapper .owl-item {
+  opacity: 0;
+  transform: scale(0.6);
+  -ms-transform: scale(0.6);
+  transition: all 0.2s;
+  -webkit-transform: all 0.2s;
+  z-index: 1;
+}
+.owl_wrapper .active {
+  opacity: 0.5;
+}
+.owl_wrapper .active.middle_beside {
+  transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  opacity: 0.8;
+  margin: 0 -1%;
+  z-index: 2;
+}
+.owl_wrapper .active.middle {
+  transform: scale(1);
+  -ms-transform: scale(1);
+  opacity: 1;
+  z-index: 3;
+}
+.owl_wrapper .active.next_to_mid {
+  margin-left: -1%;
+}
+.owl_wrapper .active.prev_to_mid {
+  margin-right: -1%;
+}
+
+.owl_wrapper .prev,
+.owl_wrapper .next {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 30px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+  background: #777;
+  cursor: pointer;
+  z-index: 5;
+}
+.owl_wrapper .next {
+  left: calc(100% - 100px);
+}
+.no_select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.bg-purple {
+  background: #4f3c97 !important;
+}
+@media only screen and (max-width: 768px) {
+  .main {
+    background: none !important;
+  }
+}
+
+
+/* snn */
+
+.corosil-snn {
+  background-image: url("../../src/constant/images/IMG_3302.png");
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  padding: 15% 0%;
+
+
+}
+
+#carouselExample {
+  width: 400px;
+  position: relative;
+}
+
+.carousel-inner img {
+  border-radius: 25px;
+}
+
+.real-border {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
+}
+
+/* #carouselExample .carousel-control-next,
+.carousel-control-prev {
+  margin-left: -15% !important;
+}
+
+#carouselExample .carousel-control-next,
+.carousel-control-prev {
+  margin-right: -15% !important;
+} */
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #221A42;
+  border-radius: 50%;
+  padding: 3%;
+}
