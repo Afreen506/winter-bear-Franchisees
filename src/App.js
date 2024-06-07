@@ -29,6 +29,7 @@ import Offers from "./pages/offers";
 import Shoponline from "./pages/Shoponline";
 
 import Event2 from "./pages/Event2";
+import Invoice from "./pages/Invoice";
 
 const App = () => {
   return (
@@ -70,6 +71,7 @@ const App = () => {
           <Route path="/offers" element={<Offers />} />
 
           <Route path="/shop-online" element={<Shoponline/>}/>
+          <Route path="/Invoice" element={<Invoice/>}/>
         </Routes>
       </Router>
 
