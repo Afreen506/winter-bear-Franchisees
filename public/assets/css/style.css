@@ -3356,3 +3356,7 @@ th {
   padding: 7px 0px;
   margin-bottom: 0%;
 }
+.sub-total{
+  display: flex;
+  justify-content: end;
+}
