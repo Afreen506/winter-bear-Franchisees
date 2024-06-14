@@ -144,7 +144,7 @@ const Invoice = () => {
           <div className="col-5">Remarks / Payment Instructions:
           </div>
           <div className="col-5">
-            <p>SUBTOTAL:</p>
+            <p >SUBTOTAL:</p>
             <p>DISCOUNT:
             </p>
             <p>SUBTOTAL LESS DISCOUNT:

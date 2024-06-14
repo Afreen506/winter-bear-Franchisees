@@ -3322,6 +3322,7 @@ th {
 .bor-updn {
   border: 5px solid #4e3c98;
   padding: 0px 0px;
+  font-size: small;
 }
 @media only screen and (max-width:760px) {
   #table {
