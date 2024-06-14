@@ -206,7 +206,7 @@ const Checkout = () => {
         </div>
         <div className="cart-totals-item total border-top mt-4 pt-3">
           <span>Total :</span>
-          <span>{getTotal() < "999" ? getTotal() + "150.00" : getTotal()}</span>
+          <span>{getTotal() < "999" ? getTotal() + 150.00 : getTotal()}</span>
         </div>
         {/* Proceed to Checkout button */}
         <div className="cart-totals-item-btn mt-4 mb-4 ">
@@ -254,7 +254,7 @@ const Checkout = () => {
                   },
                 ]}
               /> */}
-              <div className="col-md-12 row mt-5">
+              <div className="col-md-12 row mt-5 tab-wid">
               {renderCartList()}
               {renderCardtotals()}
               
