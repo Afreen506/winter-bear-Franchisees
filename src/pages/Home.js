@@ -110,7 +110,7 @@ const Home2 = () => {
         quantity: "1",
       };
      await dispatch(AddCardProductById(addcarditem))
-     await dispatch(GetAddCardProductById(userId))
+    //  await dispatch(GetAddCardProductById(userId))
   
      message.success(`Succesfully Add the Cart ${id.name}`)
     }else{
@@ -305,6 +305,9 @@ const Home2 = () => {
                                   <p className="text-start prize-size mb-0 ">
                                     {" "}
                                     {item.brand.name} @{prod.name}
+                                  </p>
+                                  <p className="prod-pric1 mb-0 ">
+                                   MRP ₹{prod.offeramount}
                                   </p>
                                   <p className="prod-pric mb-0 ">
                                     ₹{prod.amount}

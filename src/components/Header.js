@@ -602,15 +602,8 @@ const Header = () => {
                               className="text-decoration-none px-1"
                             >
                               Login
-                            </a>{" "}
-                            |{" "}
-                            <a
-                              style={{ cursor: "pointer" }}
-                              onClick={handleOpenModal}
-                              className="text-decoration-none px-1"
-                            >
-                              Register
                             </a>
+                            
                             <a
                               href="/cart"
                               className="text-decoration-none ps-3"

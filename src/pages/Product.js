@@ -236,13 +236,16 @@ const Product = () => {
             <p>CATEGORIES: FILES, STATIONERY</p>
           </div>
           <div className="col-md-12 sku-tag row mt-3">
-            <p className="price-amount col-md-2">₹{product.amount}</p>
-            <p className="col-md-2 text-decoration-line-through">
+            <p className="price-amount col-md-2">MRP ₹{product.offeramount}</p>
+            {/* <p className="col-md-2 text-decoration-line-through">
               ₹ {product.offeramount}
-            </p>
+            </p> */}
             <p className="col-md-2 offer-per">
               {parseFloat(product.offeramount / product.amount).toFixed(0)}% OFF
             </p>
+          </div>
+          <div>
+          <p className="price-amount1 col-md-2">₹{product.amount}</p>
           </div>
           {product.category_id === "65a79023a4420b22a687efa6" && (
             <div className="size-selector col-md-12 sku-tag row mt-3">
