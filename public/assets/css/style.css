@@ -500,7 +500,7 @@ footer ul a {
   left: 50% !important;
   bottom: 0;
   transform: translateX(-50%);
-  width: 100%;
+  width: 70%;
 }
 
 .copy-right {
@@ -657,8 +657,18 @@ footer ul a {
     position: relative;
     overflow: hidden;
   }
+
+
+
+  .product-item {
+    width: 275px !important;
+  }
+
 }
 
+.cart-list{
+  overflow-x: scroll;
+}
 
 .tile-1 .item img {
   width: 100%;
@@ -673,7 +683,7 @@ footer ul a {
 
 .product-shopby {
   height: 150px !important;
-  object-fit: cover !important;
+  object-fit: contain !important;
   transition: transform 0.7s ease;
 }
 
@@ -1859,15 +1869,6 @@ input {
 }
 
 .price-amount {
-  color: #d15131 !important;
-  font-family: Poppins !important;
-  font-size: 16px !important;
-  font-style: normal !important;
-  font-weight: 300 !important;
-  line-height: 100% !important;
-  text-decoration: line-through;
-}
-.price-amount1 {
   color: #221A42 !important;
   font-family: Poppins !important;
   font-size: 28px !important;
@@ -2122,6 +2123,7 @@ input {
 
   background-image: url('../images/Newspaper.png');
   background-size: cover;
+  background-color: transparent !important;
   /* Ensure the image covers the entire modal */
 }
 
@@ -2610,20 +2612,14 @@ input {
   font-weight: 600;
 }
 
-
 .prod-pric {
   font-size: 15px;
   font-weight: 500;
 }
-.prod-pric1 {
-  font-size: 15px;
-  font-weight: 300;
-  text-decoration:line-through;
-  color: red;
-}
+
 .product-shopby:hover {
   transition: transform 0.9s ease;
-  transform: scale(1.5);
+  transform: scale(1.2);
   overflow: hidden !important;
 
 }
@@ -2639,7 +2635,6 @@ input {
 
 }
 
-
 .brand-list-nav {
   display: flex;
   flex-direction: column;
@@ -2654,7 +2649,7 @@ input {
 
 .product-card img {
   height: 250px !important;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.3s;
 }
 
@@ -2666,8 +2661,14 @@ input {
   overflow: hidden;
 }
 
+.ant-image-mask {
+
+  background: rgba(0, 0, 0, 0) !important;
+
+}
+
 .product-card img:hover {
-  transform: scale(1.5);
+  transform: scale(1.2);
   overflow: hidden !important;
 }
 
@@ -2680,6 +2681,10 @@ a {
   overflow-y: hidden !important;
 }
 
+.sing-prod{
+  object-fit: contain !important; 
+}
+
 .home-product-in {
   overflow: hidden;
 }
@@ -2688,6 +2693,33 @@ a {
   width: 120px;
 }
 
+
+.drp-dwnn{
+  background-color: white !important;
+}
+
+.ant-popover {
+  /* background-color: white !important; */
+  box-shadow: none !important;
+}
+
+
+.search-drpdwn{
+  width: 75%;
+  background-color: white;
+  display: block;
+  margin: auto;
+}
+
+.search-drpdwn .row{
+  background-color: #FFE5E5 !important;
+  border-radius: 10px;
+  padding: 3%;
+}
+
+.search-drpdwn .row .col-md-6 .col-md-12{
+  border-bottom: 0.5px solid #c1baba;
+}
 
 .shopall-menu:hover {
   display: block !important;
@@ -2858,6 +2890,10 @@ a {
 
   .filter-btns-cont {
     width: 100% !important;
+  }
+
+  .search-drpdwn {
+    width: 95%;
   }
 
   .image-container img {
@@ -3548,49 +3584,12 @@ th {
   background-color: white !important;
   border-radius: 50%;
 }
-.clr-tp {
-  background-color: #f2edf2;
-}
-.bor-updn {
-  border: 5px solid #4e3c98;
-  padding: 0px 0px;
-  font-size: x-small;
-}
-@media only screen and (max-width:760px) {
-  #table {
-    width: 100% !important;
-    border-collapse: collapse;
-    overflow-x: auto;
-  }
-}
-#table {
-  width: 90%;
-  border-collapse: collapse;
-}
-.tableitem {
-  padding: 5px 0 5px 15px;
-  border: 1px solid #eee;
-}
-.tabletitle {
-  background-color: #f2edf2;
-  
-  .item{
-    padding: 10px;
-  }
+
+.homebanner img {
+  height: 100vh !important;
+  /* object-fit: cover !important; */
 }
 
-.service {
-  border: 1px solid #eee;
+.popover-item{
+  background-color: red !important;
 }
-
-.itemtext {
-  font-size: 1em;
-  padding: 7px 0px;
-  margin-bottom: 0%;
-}
-.sub-total{
-  display: flex;
-  justify-content: end;
-}
-
-

@@ -4,9 +4,9 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import RegisterModal from "./RegisterModal";
 import LoginModal from "./LoginModal";
-import { ProfileUserData, CouponUserById ,GetAddCardProductById} from "../reducer/thunks";
+import { ProfileUserData, CouponUserById ,GetAddCardProductById,GetCardProductById} from "../reducer/thunks";
 import { useDispatch, useSelector } from "react-redux";
-import { message } from "antd/es";
+import Logo from '../constant/images/Winterbear-Logo.webp';
 import { IoIosLogIn } from "react-icons/io";
 import NewsPaper from "./NewsPaper";
 import { ShoppingCartOutlined, WalletOutlined } from "@ant-design/icons";
@@ -14,6 +14,7 @@ import { Carousel, Select, Badge } from "antd";
 import Language from "../constant/Language";
 import SearchList from "./SearchList";
 const { Option } = Select;
+
 
 function chunkArray(array, chunkSize) {
   const chunks = [];
@@ -56,7 +57,6 @@ const Header = () => {
   ];
 
   let userId = localStorage.getItem("userId");
-  let NewsPaperId = localStorage.getItem("NewsPaperID");
 
   const [navbarBg, setNavbarBg] = useState("bg-white");
   const [modalVisible, setModalVisible] = useState(false);
@@ -102,17 +102,27 @@ const Header = () => {
     setModalVisible(false);
   };
   useEffect(() => {
-    console.log(userId, "userId");
-    if (userId !== undefined || userId !== null) {
+    console.log(userId, "userId",userId !== undefined , userId !== null);
+    if (userId !== undefined && userId !== null) {
       dispatch(ProfileUserData(userId));
       dispatch(GetAddCardProductById(userId));
       // dispatch(CouponUserById())
+    }else{
+      let getlistcarts = localStorage.getItem("cardstore");
+      if (getlistcarts) {
+        const productIds =  {productIds :JSON.parse(getlistcarts)}
+        console.log(productIds);
+        dispatch(GetCardProductById(productIds));
+      }
     }
-    if (NewsPaperId === null) {
+    const lastShown = localStorage.getItem('NewsPaperLastShown');
+    const today = new Date().toLocaleDateString();
+
+    if (lastShown !== today) {
       setNewsVisible(true);
-      localStorage.setItem("NewsPaperID", true);
+      // Update the last shown date in localStorage
+      localStorage.setItem('NewsPaperLastShown', today);
     }
-    // localStorage.removeItem("NewsPaperID")
 
     // if (getUserResponse) {
     //   const { firstname, lastname } = getUserResponse.User;
@@ -342,7 +352,7 @@ const Header = () => {
                       id="offcanvasExampleLabel"
                     >
                       <img
-                        src="../assets/images/winterbear-logo.png"
+                        src={require("../constant/images//Winterbear-Logo.webp")}
                         className="d-block ps-md-2 img-fluid my-5 "
                         alt="Logo"
                         loading="lazy"
@@ -474,7 +484,8 @@ const Header = () => {
               <div className="col-md-3 col-4 px-0">
                 <a href="/">
                   <img
-                    src="../assets/images/winterbear-logo.png"
+                    // src="../assets/images/winterbear-logo.png"
+                    src={require("../constant/images//Winterbear-Logo.webp")}
                     className="d-block header-logo"
                     alt="Logo"
                     loading="lazy"
@@ -602,13 +613,23 @@ const Header = () => {
                               className="text-decoration-none px-1"
                             >
                               Login
+                            </a>{" "}
+                            |{" "}
+                            <a
+                              style={{ cursor: "pointer" }}
+                              onClick={handleOpenModal}
+                              className="text-decoration-none px-1"
+                            >
+                              Register
                             </a>
-                            
                             <a
                               href="/cart"
                               className="text-decoration-none ps-3"
                             >
-                              <img src="../assets/images/icon_cart.svg" loading="lazy" />
+                               <Badge count={GetAddcardUserRes?.AddCarts?.length || 0}>
+                                <img src="../assets/images/icon_cart.svg" loading="lazy" />
+
+                              </Badge>
                               {/* <i className="fa-solid fa-bag-shopping" /> */}
                             </a>
                           </>

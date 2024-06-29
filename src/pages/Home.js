@@ -9,19 +9,22 @@ import {
   AddWishlistFetch,
   fetchWishlistData,
   AddCardProductById,
-  GetAddCardProductById
+  GetAddCardProductById,
+  GetCardProductById
 } from "../reducer/thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import HeartButton from "../components/heartbutton";
 import "./innerstyle.css";
-import {message} from "antd"
+import {  message, } from 'antd';
 import SplashScreen from "../components/SplashScreen";
 const Home2 = () => {
+  const [messageApi, contextHolder] = message.useMessage();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [visibleProducts, setVisibleProducts] = useState({}); // Initial number of products to display for each brand
   const userId = localStorage.getItem("userId");
+  const [hoveredProductId, setHoveredProductId] = useState("");
 
   const {
     data,
@@ -50,6 +53,16 @@ const Home2 = () => {
     }
   }, [dispatch, userId]);
 
+  const success = (items) => {
+    messageApi.open({
+      type: 'loading',
+      content: items,
+      duration: 0,
+    });
+    // Dismiss manually and asynchronously
+    setTimeout(messageApi.destroy, 2500);
+  };
+
   const handleNavigation = (productId) => {
     navigate(`/product/${productId}`);
   };
@@ -63,6 +76,8 @@ const Home2 = () => {
     }
    
   };
+
+  
 
   useEffect(() => {
     const handleSticky = () => {
@@ -103,22 +118,60 @@ const Home2 = () => {
   };
   
   const addcard = async (id) => {
-    if(userId){
+    success(`Successfully Added to Cart: ${id.name}`)
+    if (userId) {
       let addcarditem = {
         userId: userId,
         productId: id._id,
         quantity: "1",
       };
-     await dispatch(AddCardProductById(addcarditem))
-    //  await dispatch(GetAddCardProductById(userId))
+      await dispatch(AddCardProductById(addcarditem));
+      await dispatch(GetAddCardProductById(userId));
   
-     message.success(`Succesfully Add the Cart ${id.name}`)
-    }else{
-      message.error(`Please log in to add to cart.`)
+      // message.success(`Successfully Added to Cart: ${id.name}`);
+    } else {
+      const passbody = {
+        userId: userId,
+        productId: id._id,
+        quantity: 1, // Use number for quantity
+      };
+  
+      let getlistcarts = localStorage.getItem("cardstore");
+      let addtocarts = [];
+  
+      if (getlistcarts) {
+        addtocarts = JSON.parse(getlistcarts);
+      }
+  
+      // Check if the product already exists in the cart
+      let productExists = false;
+      addtocarts = addtocarts.map((item) => {
+        if (item.productId === id._id) {
+          productExists = true;
+          return {
+            ...item,
+            quantity: parseInt(item.quantity) + 1,
+          };
+        }
+        return item;
+      });
+  
+      // If the product does not exist, add it to the cart
+      if (!productExists) {
+        addtocarts.push(passbody);
+      }
+  
+      localStorage.setItem("cardstore", JSON.stringify(addtocarts));
+      
+      if (getlistcarts) {
+        const productIds =  {productIds : addtocarts}
+        dispatch(GetCardProductById(productIds));
+      }
+      
+      // message.success(`Successfully Added to Cart: ${id.name}`);
     }
-
- 
   };
+  
 
   const loadAllProducts = (brandId) => {
     navigate(`/brand/${brandId}`);
@@ -129,6 +182,7 @@ const Home2 = () => {
 
   return (
     <>
+    {contextHolder}
       <Header />
       {data && data.banners && <HomeSlider />}
       <div className="pt-md-5">{data && data.Brands && <BrandSlider />}</div>
@@ -247,13 +301,19 @@ const Home2 = () => {
                           .map((prod, ind) => (
                             <div className="item col-lg-3 col-6 position-relative mb-3 home-product px-0 px-4"
                             // onClick={() => handleNavigation(prod._id)}
+                            onMouseEnter={() => setHoveredProductId(prod._id)}
+                            onMouseLeave={() => setHoveredProductId(null)}
                             >
                               <div className="home-product-in">
                                 <img
-                                  src={
-                                    prod.images[0] !== null &&
-                                      prod.images[0] !== "image_url1"
-                                      ? `${prod.images[0]}`
+                                   src={
+                                    hoveredProductId === prod._id &&
+                                    prod.images.length > 1 &&
+                                    prod.images[1]
+                                      ? prod.images[1]
+                                      : prod.images[0] !== null &&
+                                        prod.images[0] !== "image_url1"
+                                      ? prod.images[0]
                                       : "assets/images/Rectangle 22.png"
                                   }
                                   className="product-shopby img-fluid"
@@ -304,10 +364,7 @@ const Home2 = () => {
                                 <div className=" mt-4 col-md-12 price-prodname">
                                   <p className="text-start prize-size mb-0 ">
                                     {" "}
-                                    {item.brand.name} @{prod.name}
-                                  </p>
-                                  <p className="prod-pric1 mb-0 ">
-                                   MRP ₹{prod.offeramount}
+                                    {prod.name}
                                   </p>
                                   <p className="prod-pric mb-0 ">
                                     ₹{prod.amount}
