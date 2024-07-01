@@ -9,7 +9,7 @@ import {
 } from "../reducer/thunks";
 import constant from "../constant/constant";
 import { useNavigate } from "react-router-dom";
-import { Steps } from "antd";
+import { Steps, message } from "antd";
 import Relatedproducts from "../components/Relatedproducts";
 
 const Checkout = () => {
@@ -42,8 +42,6 @@ const Checkout = () => {
 // Add DeleteAddcardUserRes as a dependency
 
 
-
-
   useEffect(() => {
     if (DeleteAddcardUserRes) {
       // Trigger fetching the updated data after successful deletion
@@ -73,7 +71,12 @@ const Checkout = () => {
     dispatch(DeleteAddCardProductById(productId));
   };
   const handleCheckout = () => {
-    navigate(`/checkout`);
+    if(getTotal() + 150.00 >5000){
+      navigate(`/checkout`);
+    }else{
+message.warning("Your minimum order should be more than ₹5000");
+  
+    }
   };
 
   

@@ -96,7 +96,7 @@ const Invoice = () => {
             </div>
           </div>
         </div>
-        <div className="fs-6 text-end px-2 py-2">
+        <div className="text-end px-2 py-2">
           Payment terms (due on receipt, due in X days)
         </div>
         <div className="row d-flex justify-content-center">

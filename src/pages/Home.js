@@ -9,25 +9,24 @@ import {
   AddWishlistFetch,
   fetchWishlistData,
   AddCardProductById,
-  GetAddCardProductById
+  GetAddCardProductById,
 } from "../reducer/thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import HeartButton from "../components/heartbutton";
 import "./innerstyle.css";
-import {message} from "antd"
+import { message } from "antd";
 import SplashScreen from "../components/SplashScreen";
+import { Badge, Card, Space } from "antd";
 const Home2 = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [visibleProducts, setVisibleProducts] = useState({}); // Initial number of products to display for each brand
   const userId = localStorage.getItem("userId");
 
-  const {
-    data,
-    loading: bannerLoading,
-    error: bannerError,
-  } = useSelector((state) => state.data);
+  const { data, loading: bannerLoading, error: bannerError } = useSelector(
+    (state) => state.data
+  );
   const {
     wishlist,
     addloading: addloadingLoading,
@@ -55,13 +54,12 @@ const Home2 = () => {
   };
 
   const handleWishlists = async (prod_id) => {
-    if(userId){
+    if (userId) {
       const passbody = { userId: userId, productId: prod_id };
       await dispatch(AddWishlistFetch(passbody));
-    }else{
-      message.error(`Please log in to Wishlist the product.`)
+    } else {
+      message.error(`Please log in to Wishlist the product.`);
     }
-   
   };
 
   useEffect(() => {
@@ -101,30 +99,28 @@ const Home2 = () => {
       return newState;
     });
   };
-  
+
   const addcard = async (id) => {
-    if(userId){
+    if (userId) {
       let addcarditem = {
         userId: userId,
         productId: id._id,
         quantity: "1",
       };
-     await dispatch(AddCardProductById(addcarditem))
-    //  await dispatch(GetAddCardProductById(userId))
-  
-     message.success(`Succesfully Add the Cart ${id.name}`)
-    }else{
-      message.error(`Please log in to add to cart.`)
-    }
+      await dispatch(AddCardProductById(addcarditem));
+      //  await dispatch(GetAddCardProductById(userId))
 
- 
+      message.success(`Succesfully Add the Cart ${id.name}`);
+    } else {
+      message.error(`Please log in to add to cart.`);
+    }
   };
 
   const loadAllProducts = (brandId) => {
     navigate(`/brand/${brandId}`);
   };
-  if(!data){
-   return <SplashScreen/>
+  if (!data) {
+    return <SplashScreen />;
   }
 
   return (
@@ -245,14 +241,20 @@ const Home2 = () => {
                         {item.products
                           .slice(0, visibleProducts[item.brand._id] || 8)
                           .map((prod, ind) => (
-                            <div className="item col-lg-3 col-6 position-relative mb-3 home-product px-0 px-4"
-                            // onClick={() => handleNavigation(prod._id)}
+                            <div
+                              className="item col-lg-3 col-6 position-relative mb-3 home-product px-0 px-4"
+                              // onClick={() => handleNavigation(prod._id)}
                             >
                               <div className="home-product-in">
-                                <img
+                              <Badge.Ribbon text="1 left" placement="start" className="ani-rd">
+                                    <div
+                                      
+                                      size="small"
+                                    >
+                                      <img
                                   src={
                                     prod.images[0] !== null &&
-                                      prod.images[0] !== "image_url1"
+                                    prod.images[0] !== "image_url1"
                                       ? `${prod.images[0]}`
                                       : "assets/images/Rectangle 22.png"
                                   }
@@ -261,6 +263,10 @@ const Home2 = () => {
                                   loading="lazy"
                                   onClick={() => handleNavigation(prod._id)}
                                 />
+                                    </div>
+                                  </Badge.Ribbon>
+
+                             
 
                                 <div
                                   className="text-center  border-secondary addtocart-btn px-1 py-1 "
@@ -276,10 +282,10 @@ const Home2 = () => {
                                 <div className="d-flex justify-content-between position-absolute top-0 start-0 w-100  px-4 px-lg-0">
                                   {item.brand._id ===
                                     "65aa405f6bfadce6d5a0ef3c" && (
-                                      <p className="text-white text-center  text-decoration-line-through w-25 mt-2 rounded-end bg-theme-dis">
-                                        40%
-                                      </p>
-                                    )}
+                                    <p className="text-white text-center  text-decoration-line-through w-25 mt-2 rounded-end bg-theme-dis">
+                                      40%
+                                    </p>
+                                  )}
 
                                   <div></div>
 
@@ -297,7 +303,6 @@ const Home2 = () => {
                                     ) : (
                                       <HeartButton isActives={false} />
                                     )}
-
                                   </button>
                                 </div>
 
@@ -307,7 +312,7 @@ const Home2 = () => {
                                     {item.brand.name} @{prod.name}
                                   </p>
                                   <p className="prod-pric1 mb-0 ">
-                                   MRP ₹{prod.offeramount}
+                                    MRP ₹{prod.offeramount}
                                   </p>
                                   <p className="prod-pric mb-0 ">
                                     ₹{prod.amount}
@@ -317,7 +322,6 @@ const Home2 = () => {
                               <div
                                 className="text-center d-none border-secondary addtocart-btn px-1 py-1 "
                                 style={{ cursor: "pointer" }}
-
                                 onClick={() => handleNavigation(prod._id)}
                               >
                                 <i className="fas fa-cart-plus me-2" /> Add to
@@ -340,7 +344,11 @@ const Home2 = () => {
                           className="text-center view-more"
                           style={{ cursor: "pointer" }}
                         >
-                          <div onClick={() => loadMoreOrLessProducts(item.brand._id)}>
+                          <div
+                            onClick={() =>
+                              loadMoreOrLessProducts(item.brand._id)
+                            }
+                          >
                             View Less <br />
                             <i className="fa-solid fa-angle-up"></i>
                           </div>

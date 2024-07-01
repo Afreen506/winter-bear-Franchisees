@@ -16,7 +16,7 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import { Nav, Tab } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { message, Rate } from "antd";
+import { Badge, message, Rate } from "antd";
 import MultiCarousel from "../components/MultiCarousel";
 import { HeartOutlined, ShareAltOutlined } from "@ant-design/icons";
 import Copyimage from "../constant/images/Copy.svg";
@@ -152,6 +152,7 @@ const Product = () => {
         >
           {product?.images &&
             product?.images.map((image, index) => (
+              <Badge.Ribbon text="1 left"  placement="start" className="ani-rd1 py-2 px-3">
               <div key={index} className="item mb-4 mb-0">
                 <img
                   src={`${image}`}
@@ -160,6 +161,7 @@ const Product = () => {
                   loading="lazy"
                 />
               </div>
+              </Badge.Ribbon>
             ))}
         </OwlCarousel>
         <div className="position-absolute top-0 end-0 mx-3 mt-2">
