@@ -2607,15 +2607,18 @@ input {
 
 .prize-size {
   font-family: Poppins;
-  font-size: 15px;
+  font-size: 14px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .prod-pric {
   font-size: 15px;
   font-weight: 500;
+  color: rgb(156, 156, 156);
+  text-decoration: line-through;
 }
+
 
 .product-shopby:hover {
   transition: transform 0.9s ease;
@@ -3593,3 +3596,84 @@ th {
 .popover-item{
   background-color: red !important;
 }
+/* afreen css...............start.... */
+
+
+.clr-tp {
+  background-color: #f2edf2;
+}
+.bor-updn {
+  border: 5px solid #4e3c98;
+  padding: 0px 0px;
+  font-size: x-small;
+}
+@media only screen and (max-width: 760px) {
+  #table {
+    width: 100% !important;
+    border-collapse: collapse;
+    overflow-x: auto;
+  }
+}
+#table {
+  width: 90%;
+  border-collapse: collapse;
+}
+.tableitem {
+  padding: 5px 0 5px 15px;
+  border: 1px solid #eee;
+}
+.tabletitle {
+  background-color: #f2edf2;
+
+  .item {
+    padding: 10px;
+  }
+}
+
+.service {
+  border: 1px solid #eee;
+}
+
+.itemtext {
+  font-size: 1em;
+  padding: 7px 0px;
+  margin-bottom: 0%;
+}
+.sub-total {
+  display: flex;
+  justify-content: end;
+}
+.ani-rd {
+  padding-left: 12px;
+  margin-left: 5px;
+background: linear-gradient(45deg,#df4346,rgb(250, 152, 152),#df4346);
+background-size: 200% 200%; 
+animation: shine 2s infinite linear;
+
+}
+.ani-rd1 {
+  padding-left: 12px;
+  margin-left: 5px;
+  font-size: large;
+background: linear-gradient(45deg,#df4346,rgb(250, 152, 152),#df4346);
+background-size: 200% 200%; 
+animation: shine 2s infinite linear;
+
+}
+@keyframes shine{
+  0% {
+    background-position: 0% 50%; /* Start position of the gradient */
+  }
+  100% {
+    background-position: 100% 50%; /* End position of the gradient */
+  }
+
+}
+.prod-cl{
+  color: #df4346;
+  margin-left: 7px;
+}
+
+
+
+/* afreen css...............end.... */

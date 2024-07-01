@@ -16,7 +16,7 @@ import HomeSlider from "../components/BrandSlider";
 import { Dropdown, Menu, Empty, Pagination, Slider } from "antd";
 
 import HeartButton from "../components/heartbutton";
-
+import { Badge, Card, Space } from "antd";
 const Brandlist = () => {
   const dispatch = useDispatch();
   document.title = "Winter Bear";
@@ -614,7 +614,18 @@ const Brandlist = () => {
                         </button>
                       </div>
                       <div className="home-product-in">
-                        <img
+                      {prod.qty < 10 ? (
+                          <Badge.Ribbon
+                            text={`${prod.qty} left`}
+                            placement="start"
+                            className="ani-rd"
+                          >
+                            <div
+                              data-aos="flip-left"
+                              size="small"
+                              data-aos-duration="1000"
+                            >
+                               <img
                           src={
                             hoveredProductId === prod._id &&
                             prod.images.length > 1 &&
@@ -629,6 +640,32 @@ const Brandlist = () => {
                           alt={prod.name}
                           onClick={() => handleNavigation(prod._id)}
                         />
+                            </div>
+                          </Badge.Ribbon>
+                        ) : (
+                          <div data-aos="flip-left" data-aos-duration="1000">
+                            <img
+                          src={
+                            hoveredProductId === prod._id &&
+                            prod.images.length > 1 &&
+                            prod.images[1]
+                              ? prod.images[1]
+                              : prod.images[0] !== null &&
+                                prod.images[0] !== "image_url1"
+                              ? prod.images[0]
+                              : "assets/images/Rectangle 22.png"
+                          }
+                          className="product-shopall img-fluid"
+                          alt={prod.name}
+                          onClick={() => handleNavigation(prod._id)}
+                        />
+                          </div>
+                        )}
+
+
+
+
+                      
                         <div
                           class="text-center  border-secondary addtocart-btn px-1 py-1 mx-2"
                           onClick={() => handleNavigation(prod._id)}
@@ -636,14 +673,18 @@ const Brandlist = () => {
                           <i class="fas fa-cart-plus me-2"></i> Add to Cart
                         </div>
                       </div>
-                      <div className="text-center price-card py-2">
-                        <p
-                          className="font-z text-truncate"
-                          style={{ maxWidth: "200px" }}
-                        >
+                      <div className="price-card py-2">
+                      <div data-aos="fade-up" data-aos-duration="1000">
                           {prod.name}
+                        </div>
+                        <p className="prod-pric1 mb-0">
+                          <span className="prod-pric">
+                            ₹{prod.offeramount}{" "}
+                          </span>{" "}
+                          <span className="fw-semibold prod-cl">
+                            ₹{prod.amount}
+                          </span>
                         </p>
-                        <p className=" mb-0">₹{prod.amount}</p>
 
                         <div
                           class="text-center d-none border-secondary addtocart-btn px-1 py-1 mx-2"
