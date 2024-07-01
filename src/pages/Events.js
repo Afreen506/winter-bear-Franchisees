@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Popover } from "antd";
 import "./Events.css";
 import "./eventes2.css";
-import page01 from '../constant/images/page01.png';
 
 const months = [
   "January", "February", "March", "April", "May", "June",
@@ -19,14 +18,8 @@ const currentYear = new Date().getFullYear();
 const years = Array.from({ length: currentYear - 1899 }, (_, i) => currentYear - i);
 
 const PopoverContent = () => (
-  <div className="popup-cont">
-    <img src={require('../constant/images/page01.png')} className="frame-img" />
-    <div className="card-pos">
-
-      <img src="https://storage.googleapis.com/email-js-1a09b.appspot.com/winterbear/Classics_E_Commerce_Banners-24.png" className="pop-imgg" />
-
-      <p>Pop the lid, and reveal your next WINTERBEAR event!</p>
-    </div>
+  <div>
+    <p>Pop the lid, and reveal your next WINTERBEAR event!</p>
   </div>
 );
 
@@ -198,8 +191,7 @@ const EventsSection = () => {
                     <div className="shelf" key={index}>
                       {Array.from({ length: 4 }, (_, jarIndex) => (
                         <Popover content={<PopoverContent />} trigger="hover" key={jarIndex}>
-                          <div className="jar ant-popover-open"></div>
-
+                          <div className="jar"></div>
                         </Popover>
                       ))}
                     </div>
@@ -222,8 +214,6 @@ const EventsSection = () => {
           </div>
         </div>
 
-
-
       </section>
 
       <Gallery />
@@ -233,7 +223,7 @@ const EventsSection = () => {
 };
 
 export default EventsSection;
-
+ 
 
 
 

@@ -8,8 +8,6 @@ import {
   AddCardProductById,
   RatingProductUserById,
   fetchProductData,
-  GetAddCardProductById,
-  GetCardProductById
 } from "../../src/reducer/thunks";
 import { useDispatch, useSelector } from "react-redux";
 import constant from "../constant/constant";
@@ -18,7 +16,7 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import { Nav, Tab } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { message, Rate,notification,Image } from "antd";
+import { Badge, message, Rate } from "antd";
 import MultiCarousel from "../components/MultiCarousel";
 import { HeartOutlined, ShareAltOutlined } from "@ant-design/icons";
 import Copyimage from "../constant/images/Copy.svg";
@@ -63,7 +61,6 @@ const Product = () => {
   }, []);
 
   const [selectedSize, setSelectedSize] = useState(null);
-  const [indesitem, setSelecteditem] = useState(1);
 
   const sizes = ["XS", "S", "M", "L", "XL", "2XL", "3XL", "4XL"];
 
@@ -71,14 +68,11 @@ const Product = () => {
     setSelectedSize(size);
   };
 
-  const [messageApi, contextHolder] = message.useMessage();
-
-
   const {
-    productOldlist,
+    productlist,
     loading: productListLoading,
     error: productListError,
-  } = useSelector((state) => state.productOldlist);
+  } = useSelector((state) => state.productlist);
 
   const {
     RatingProductRes: RatingResponce,
@@ -153,22 +147,21 @@ const Product = () => {
           loop
           margin={10}
           items={1}
-          startPosition={indesitem}
           dots={false}
           nav={false}
         >
           {product?.images &&
             product?.images.map((image, index) => (
+              <Badge.Ribbon text="1 left"  placement="start" className="ani-rd1 py-2 px-3">
               <div key={index} className="item mb-4 mb-0">
-                <Image
+                <img
                   src={`${image}`}
-                  height={500}
-                  
                   alt={`Product Image ${index}`}
-                  className="product-img-main rounded sing-prod"
+                  className="product-img-main rounded"
                   loading="lazy"
                 />
               </div>
+              </Badge.Ribbon>
             ))}
         </OwlCarousel>
         <div className="position-absolute top-0 end-0 mx-3 mt-2">
@@ -182,81 +175,33 @@ const Product = () => {
         </div>
         <div className="d-flex justify-content-center">
           {product && product?.images && product?.images.length > 1 && (
-            <MultiCarousel images={product?.images} indexs={(item)=>{
-              console.log(item,"item");
-              setSelecteditem(item)
-            }}/>
+            <MultiCarousel images={product?.images} />
           )}
         </div>
 
-       
+        {/* <OwlCarousel className="owl-theme" loop margin={10} items={4} dots={false} nav={product.images && product.images.length > 4}>
+  {product.images &&
+    product.images.map((image, index) => (
+      <div key={index} className="item">
+        <img
+          src={`${constant.baseUrl}${image}`}
+          alt={`Product Image ${index}`}
+        />
+      </div>
+    ))}
+</OwlCarousel> */}
       </>
     );
   };
 
-  
-
   const addcard = async (id) => {
-    success(`Successfully Added to Cart: ${id.name}`)
-    if (userId) {
-      let addcarditem = {
-        userId: userId,
-        productId: id._id,
-        quantity: "1",
-      };
-      await dispatch(AddCardProductById(addcarditem));
-      await dispatch(GetAddCardProductById(userId));
-  
-    } else {
-      const passbody = {
-        userId: userId,
-        productId: id._id,
-        quantity: 1, // Use number for quantity
-      };
-  
-      let getlistcarts = localStorage.getItem("cardstore");
-      console.log(getlistcarts,"getlistcarts");
-      let addtocarts = [];
-  
-      if (getlistcarts) {
-        addtocarts = JSON.parse(getlistcarts);
-      }
-  
-      // Check if the product already exists in the cart
-      let productExists = false;
-      addtocarts = addtocarts.map((item) => {
-        if (item.productId === id._id) {
-          productExists = true;
-          return {
-            ...item,
-            quantity: parseInt(item.quantity) + 1,
-          };
-        }
-        return item;
-      });
-  
-      // If the product does not exist, add it to the cart
-      if (!productExists) {
-        addtocarts.push(passbody);
-      }
-      if (getlistcarts) {
-        const productIds =  {productIds :addtocarts}
-        console.log(productIds);
-        dispatch(GetCardProductById(productIds));
-      }
-      localStorage.setItem("cardstore", JSON.stringify(addtocarts));
-    }
-  };
-
-  
-  const success = (items) => {
-    messageApi.open({
-      type: 'loading',
-      content: items,
-      duration: 0,
-    });
-    // Dismiss manually and asynchronously
-    setTimeout(messageApi.destroy, 2500);
+    let addcarditem = {
+      userId: userId,
+      productId: id._id,
+      quantity: "1",
+    };
+    await dispatch(AddCardProductById(addcarditem));
+    message.success(`Succesfully Add the Cart ${id.name}`);
   };
 
   const buyproduct = async (id) => {
@@ -290,18 +235,19 @@ const Product = () => {
             </p>
           </div>
           <div className="sku-tag">
-          <p>CATEGORIES: {product.category && product?.category?.split('>')[1] && product.category.split('>')[1]}</p>
+            <p>CATEGORIES: FILES, STATIONERY</p>
           </div>
           <div className="col-md-12 sku-tag row mt-3">
-            <p className="price-amount col-md-2">₹{product.amount}</p>
+            <p className="price-amount col-md-2">MRP ₹{product.offeramount}</p>
             {/* <p className="col-md-2 text-decoration-line-through">
               ₹ {product.offeramount}
             </p> */}
-            {product.category_id === "65a79023a4420b22a687efa6" &&
-             <p className="col-md-2 offer-per">
-             {parseFloat(40).toFixed(0)}% OFF
-           </p>}
-           
+            <p className="col-md-2 offer-per">
+              {parseFloat(product.offeramount / product.amount).toFixed(0)}% OFF
+            </p>
+          </div>
+          <div>
+          <p className="price-amount1 col-md-2">₹{product.amount}</p>
           </div>
           {product.category_id === "65a79023a4420b22a687efa6" && (
             <div className="size-selector col-md-12 sku-tag row mt-3">
@@ -325,13 +271,13 @@ const Product = () => {
           <hr />
 
           <div className="text-start col-md-12 row mt-3">
-            {/* <div className="col-md-3">
+            <div className="col-md-3">
               <p className="d-flex justify-content-center align-items-center border qty-button">
                 <button className="btn btn-primary me-2 bg-cl-tr">+</button>
                 <span>1</span>
                 <button className="btn btn-primary me-2 bg-cl-tr ">-</button>
               </p>
-            </div> */}
+            </div>
             <div className="col-md-3 col-5">
               <button
                 className="btn w-100 text-white button buy-now-tag"
@@ -423,8 +369,18 @@ const Product = () => {
                 <div className="text-start col-md-12 row mt-5">
                   <div className="col-md-5 sku-tag feature-item ">
                     <h4>Description</h4>
-                    <div>{product.description && product.description.replaceAll(/\\n/g, ' ')}</div>
-                   
+                    <p>{product.description}</p>
+                    <p>
+                      The most powerful MacBook Pro ever is here. With the
+                      blazing-fast M1 Pro or M1 Max chip — the first Apple
+                      silicon designed for pros — you get groundbreaking
+                      performance and amazing battery life. Add to that a
+                      stunning Liquid Retina XDR display, the best camera and
+                      audio ever in a Mac notebook, and all the ports you need.
+                      The first notebook of its kind, this MacBook Pro is a
+                      beast. M1 Pro takes the exceptional performance of the M1
+                      architecture to a whole new level for pro users.
+                    </p>
                   </div>
                   <div className="col-md-4 sku-tag feature-item ">
                     <h4>Feature</h4>
@@ -587,9 +543,6 @@ const Product = () => {
   };
 
   const renderRelatedProducts = () => {
-    const product = GetProductIdResponse?.Products || {};
-    const relatedProducts = productOldlist?.productList?.find((i) => i.brand._id === product.brand_id)?.products?.slice(0, 10) || [];
-  
     return (
       <OwlCarousel
         className="owl-theme col-md-12"
@@ -608,40 +561,54 @@ const Product = () => {
           },
         }}
       >
-        {relatedProducts.map((prod, ind) => (
-          <div key={ind} className="item col-md-10 position-relative mb-3 home-product px-0">
+        {productlist?.products?.slice(0, 10).map((prod, ind) => (
+          <div className="item col-md-10 position-relative mb-3 home-product px-0 ">
             <div className="home-product-in px-">
               <img
-                src={prod.images[0] !== null && prod.images[0] !== "image_url1"
-                  ? `${prod.images[0]}`
-                  : "assets/images/Rectangle 22.png"}
+                src={
+                  prod.images[0] !== null && prod.images[0] !== "image_url1"
+                    ? `${prod.images[0]}`
+                    : "assets/images/Rectangle 22.png"
+                }
                 loading="lazy"
                 className="product-shopby trans"
                 alt="Web Project 1"
               />
               <div
-                className="text-center border-secondary addtocart-btn px-1 py-1"
+                className="text-center  border-secondary addtocart-btn px-1 py-1 "
                 onClick={() => handleNavigation(prod._id)}
               >
                 <i className="fas fa-cart-plus me-2" /> Add to Cart
               </div>
             </div>
-  
+
             <div className="col-md-12 d-flex justify-content-between align-items-end mb-2">
               <div className="d-flex justify-content-between position-absolute top-0 start-0 w-100">
+                {/* {item.brand._id ===
+              "65aa405f6bfadce6d5a0ef3c" && (
+              <p className="text-white text-center  text-decoration-line-through w-25 mt-2 rounded-end bg-theme-dis">
+                40%
+              </p>
+            )} */}
+
                 <div></div>
+
                 <button className="heart-btn" id="hertbtn">
-                  <i className="fa-regular fa-heart"></i>
+                  <i class="fa-regular fa-heart"></i>
+                  {/* <Rate
+                character={<HeartOutlined />  }
+                count={1}
+              /> */}
                 </button>
               </div>
-  
-              <div className="mt-4 col-md-12 price-prodname">
-                <p className="text-start prize-size mb-0">{prod.name}</p>
-                <p className="prod-pric mb-0">₹{prod.amount}</p>
+
+              <div className=" mt-4 col-md-12 price-prodname">
+                <p className="text-start prize-size mb-0 "> {prod.name}</p>
+                <p className="prod-pric mb-0 ">₹{prod.amount}</p>
               </div>
             </div>
             <div
-              className="text-center d-none border-secondary addtocart-btn px-1 py-1"
+              className="text-center d-none border-secondary addtocart-btn px-1 py-1 "
               onClick={() => handleNavigation(prod._id)}
             >
               <i className="fas fa-cart-plus me-2" /> Add to Cart
@@ -651,7 +618,6 @@ const Product = () => {
       </OwlCarousel>
     );
   };
-  
 
   const renderImageProducts = () => {
     const product = GetProductIdResponse?.Products || {};
@@ -674,7 +640,6 @@ const Product = () => {
 
   return (
     <>
-        {contextHolder}
       <Header />
       <section className="py-5 mt-80">
         <div className="container">

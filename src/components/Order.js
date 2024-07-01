@@ -7,6 +7,9 @@ import constant from "../constant/constant";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
+import { Radio, Timeline } from "antd";
+import Invoice from "../pages/Invoice";
+
 const Order = () => {
   let userId = localStorage.getItem("userId");
 
@@ -24,6 +27,10 @@ const Order = () => {
   const handleModalCancel = () => {
     setModalVisible(false);
   };
+  const [mode, setMode] = useState("left");
+  const onChange = (e) => {
+    setMode(e.target.value);
+  };
 
   const modalContent = (
     <div className="p-5 ">
@@ -38,10 +45,13 @@ const Order = () => {
       </p>
 
       <p>
-        <strong>Rating:</strong> <Rate value={2} style={{
-          color: "Green"
-        }} />
-
+        <strong>Rating:</strong>{" "}
+        <Rate
+          value={2}
+          style={{
+            color: "Green",
+          }}
+        />
       </p>
       <p className="mb-0">&nbsp;</p>
       {selectedOrder?.products.map((product) => (
@@ -61,7 +71,8 @@ const Order = () => {
             </p>
 
             <p>
-              <strong>Delivery Status:</strong> {selectedOrder.delivered_type === "1" ? "Card" : "COD"}
+              <strong>Delivery Status:</strong>{" "}
+              {selectedOrder.delivered_type === "1" ? "Card" : "COD"}
             </p>
             <p>
               <strong>Payment Mode:</strong> {selectedOrder.delivery}
@@ -75,9 +86,7 @@ const Order = () => {
                 </p>
               </Col>
               <Col span={12}>
-                <p className="text-end">
-                  {product.amount}
-                </p>
+                <p className="text-end">{product.amount}</p>
               </Col>
             </Row>
             <Row>
@@ -88,8 +97,10 @@ const Order = () => {
               </Col>
               <Col span={12}>
                 <p className="text-end">
-                  <span>18% ({product.offeramount} * 0.18) = {(product.offeramount * 0.18).toFixed(2)}</span>
-
+                  <span>
+                    18% ({product.offeramount} * 0.18) ={" "}
+                    {(product.offeramount * 0.18).toFixed(2)}
+                  </span>
                 </p>
               </Col>
             </Row>
@@ -100,17 +111,10 @@ const Order = () => {
                 </p>
               </Col>
               <Col span={12}>
-                <p className="text-end">
-                  Free
-                </p>
+                <p className="text-end">Free</p>
               </Col>
             </Row>
-
-
-
-
           </Col>
-
         </Row>
       ))}
       <Row className="bg-white">
@@ -120,17 +124,50 @@ const Order = () => {
           </p>
         </Col>
         <Col span={12}>
-          <p className="text-end py-3">
-            ${selectedOrder?.totalAmount}
-          </p>
+          <p className="text-end py-3">${selectedOrder?.totalAmount}</p>
         </Col>
       </Row>
-      <Button type="primary" onClick={()=> generatePDF()}>
-        Download Invoice
-      </Button>
+      <div className="row d-flex justify-content-start">
+      <div className="col-md-6 col-12">
+            <Radio.Group
+              onChange={onChange}
+              value={mode}
+              style={{
+                marginBottom: 20,
+              }}
+            >
+              
+            </Radio.Group>
+            <Timeline
+              mode={mode}
+              items={[
+                {
+                  label: "2024-06-01",
+                  children: "Order being packed",
+                },
+                {
+                  label: "2024-06-07 ",
+                  children: "Your order is being shipped",
+                },
+                {
+                  label: "2024-06-17",
+                  children: "Your order has reached to nearby warehouse",
+                },
+                {
+                  label: "2024-06-20 ",
+                  children: "Out of delivery",
+                },
+              ]}
+            />
+          </div>
+          </div>
+
+      
+      <Invoice />
+
+     
     </div>
   );
-
 
   const {
     loading: getgetOrderUserLoading,
@@ -146,25 +183,25 @@ const Order = () => {
     if (!selectedOrder) {
       return;
     }
-  
+
     const doc = new jsPDF();
-  
+
     // Set font styles
     doc.setFont("helvetica");
     doc.setFontSize(12);
-  
+
     // Title
     doc.setTextColor("#1976d2");
     doc.setFontSize(22);
     doc.text("Order Invoice", 105, 20, null, null, "center");
-  
+
     // Customer Information
     doc.setFontSize(12);
     doc.setTextColor("#333333");
     doc.text(`Customer Name: ${selectedOrder?.user?.firstname}`, 20, 40);
     doc.text(`Address: ${selectedOrder?.address?.street}`, 20, 50);
     doc.text(`Phone Number: ${selectedOrder?.user?.mobilenumber}`, 20, 60);
-  
+
     // Table Header
     const tableHeaders = [
       { header: "Product", dataKey: "product" },
@@ -175,7 +212,7 @@ const Order = () => {
       { header: "GST Tax", dataKey: "gstTax" },
       { header: "Shipping Fee", dataKey: "shippingFee" },
     ];
-  
+
     // Table Body
     const tableData = selectedOrder?.products.map((product) => ({
       product: product.name,
@@ -190,7 +227,7 @@ const Order = () => {
       gstTax: `$${(product.offeramount * 0.18).toFixed(2)}`,
       shippingFee: "Free",
     }));
-  
+
     // AutoTable configuration
     doc.autoTable({
       startY: 80,
@@ -214,13 +251,17 @@ const Order = () => {
       },
       margin: { top: 70 },
     });
-  
+
     // Total Amount
     const totalAmountY = doc.autoTable.previous.finalY + 10;
     doc.setFontSize(12);
     doc.setTextColor("#333333");
-    doc.text(`Total Order Amount: $${selectedOrder?.totalAmount}`, 20, totalAmountY);
-  
+    doc.text(
+      `Total Order Amount: $${selectedOrder?.totalAmount}`,
+      20,
+      totalAmountY
+    );
+
     // Footer
     const footerY = doc.internal.pageSize.height - 20;
     doc.setFontSize(10);
@@ -233,12 +274,10 @@ const Order = () => {
       null,
       "center"
     );
-  
+
     // Save PDF
     doc.save("invoice.pdf");
   };
-  
-  
 
   return (
     <div className="col-md-9 p-4 ">
@@ -263,9 +302,13 @@ const Order = () => {
                   <td>{item.paymentStatus}</td>
                   <td>{item.totalAmount}</td>
                   <td>
-                    <div className="rectangle" style={{
-                      cursor: "pointer"
-                    }} onClick={() => handleViewMore(item)}>
+                    <div
+                      className="rectangle"
+                      style={{
+                        cursor: "pointer",
+                      }}
+                      onClick={() => handleViewMore(item)}
+                    >
                       <p className="text-center p-texts">View Details</p>
                     </div>
                   </td>
@@ -273,6 +316,8 @@ const Order = () => {
               ))}
             </tbody>
           </table>
+
+        
         </div>
       </div>
       <Modal

@@ -541,10 +541,6 @@ const Payment = () => {
   };
 
   const renderCardtotals = () => {
-    const hasSpecificBrand = GetAddcardUserRes?.AddCarts?.some(cartItem => 
-      cartItem.product.brand_id === "6628f33f2ab4e58448eeb108" || 
-  cartItem.product.category_id === "65a8e0ab2d5445a245b56e73"
-    );
     return (
       <div className="col-md-4 h-25 mt-3">
         <div className="cart-totals p-4">
@@ -604,8 +600,7 @@ const Payment = () => {
               <div className="payment-method-radio-group">
                 <Radio.Group onChange={handlePaymentMethodChange} value={paymentMethod}>
                   <Radio value="online">Pay Online</Radio>
-                  {!hasSpecificBrand && <Radio value="cod">Cash on Delivery</Radio>
-                  }
+                  <Radio value="cod">Cash on Delivery</Radio>
                 </Radio.Group>
               </div>
             </div>

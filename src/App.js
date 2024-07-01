@@ -27,8 +27,10 @@ import StoreLocator from "./pages/StoreLocator";
 import Wishlist from "./pages/Wishlist";
 import Offers from "./pages/offers";
 import Shoponline from "./pages/Shoponline";
-
+import Invoice from "./pages/Invoice"
 import Event2 from "./pages/Event2";
+
+
 
 const App = () => {
   return (
@@ -68,6 +70,7 @@ const App = () => {
 
 
           <Route path="/offers" element={<Offers />} />
+          <Route path="/Invoice" element={<Invoice />} />
 
           <Route path="/shop-online" element={<Shoponline/>}/>
         </Routes>
