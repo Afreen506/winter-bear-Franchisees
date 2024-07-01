@@ -246,27 +246,45 @@ const Home2 = () => {
                               // onClick={() => handleNavigation(prod._id)}
                             >
                               <div className="home-product-in">
-                              <Badge.Ribbon text="1 left" placement="start" className="ani-rd">
-                                    <div
-                                      
-                                      size="small"
-                                    >
+                                {prod.qty < 10 ? (
+                                  <Badge.Ribbon
+                                    text={`${prod.qty} left`}
+                                    placement="start"
+                                    className="ani-rd"
+                                  >
+                                    <div size="small">
                                       <img
-                                  src={
-                                    prod.images[0] !== null &&
-                                    prod.images[0] !== "image_url1"
-                                      ? `${prod.images[0]}`
-                                      : "assets/images/Rectangle 22.png"
-                                  }
-                                  className="product-shopby img-fluid"
-                                  alt="Web Project 1"
-                                  loading="lazy"
-                                  onClick={() => handleNavigation(prod._id)}
-                                />
+                                        src={
+                                          prod.images[0] !== null &&
+                                          prod.images[0] !== "image_url1"
+                                            ? `${prod.images[0]}`
+                                            : "assets/images/Rectangle 22.png"
+                                        }
+                                        className="product-shopby img-fluid"
+                                        alt="Web Project 1"
+                                        loading="lazy"
+                                        onClick={() =>
+                                          handleNavigation(prod._id)
+                                        }
+                                      />
                                     </div>
                                   </Badge.Ribbon>
-
-                             
+                                ) : (
+                                  <div size="small">
+                                    <img
+                                      src={
+                                        prod.images[0] !== null &&
+                                        prod.images[0] !== "image_url1"
+                                          ? `${prod.images[0]}`
+                                          : "assets/images/Rectangle 22.png"
+                                      }
+                                      className="product-shopby img-fluid"
+                                      alt="Web Project 1"
+                                      loading="lazy"
+                                      onClick={() => handleNavigation(prod._id)}
+                                    />
+                                  </div>
+                                )}
 
                                 <div
                                   className="text-center  border-secondary addtocart-btn px-1 py-1 "
@@ -309,10 +327,14 @@ const Home2 = () => {
                                 <div className=" mt-4 col-md-12 price-prodname">
                                   <p className="text-start prize-size mb-0 ">
                                     {" "}
-                                    {item.brand.name} @{prod.name}
+                                    {/* {item.brand.name} @ */}
+                                    {prod.name}
                                   </p>
-                                  <p className="prod-pric1 mb-0 ">
-                                    MRP ₹{prod.offeramount}
+                                  <p className="prod-pric2 mb-0 ">
+                                    MRP ₹
+                                    <span className="prod-pric1">
+                                      {prod.offeramount}
+                                    </span>
                                   </p>
                                   <p className="prod-pric mb-0 ">
                                     ₹{prod.amount}

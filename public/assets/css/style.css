@@ -2528,6 +2528,11 @@ input {
   text-decoration: line-through;
   color: rgb(248, 65, 65);
 }
+.prod-pric2 {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgb(248, 65, 65);
+}
 .product-shopby:hover {
   transition: transform 0.9s ease;
   transform: scale(1.5);
@@ -3438,7 +3443,7 @@ th {
 .ani-rd {
   padding-left: 12px;
   margin-left: 5px;
-background: linear-gradient(45deg,red,rgb(250, 152, 152),red);
+background: linear-gradient(45deg,rgb(137, 1, 1),rgb(250, 152, 152),rgb(137, 1, 1));
 background-size: 200% 200%; 
 animation: shine 2s infinite linear;
 
@@ -3447,7 +3452,7 @@ animation: shine 2s infinite linear;
   padding-left: 12px;
   margin-left: 5px;
   font-size: large;
-background: linear-gradient(45deg,red,rgb(250, 152, 152),red);
+background: linear-gradient(45deg,rgb(137, 1, 1),rgb(250, 152, 152),rgb(137, 1, 1));
 background-size: 200% 200%; 
 animation: shine 2s infinite linear;
 

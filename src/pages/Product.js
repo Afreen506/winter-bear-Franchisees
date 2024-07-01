@@ -152,6 +152,7 @@ const Product = () => {
         >
           {product?.images &&
             product?.images.map((image, index) => (
+              
               <Badge.Ribbon text="1 left"  placement="start" className="ani-rd1 py-2 px-3">
               <div key={index} className="item mb-4 mb-0">
                 <img
