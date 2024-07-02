@@ -198,12 +198,14 @@ const Home2 = () => {
                     onClick={() => navigate(`/shop/${item._id}`)}
                   >
                     <div className="image-container-1">
+                    <div data-aos="flip-left" size="small"  data-aos-duration="1000">
                       <img
                         src={`${item.imageUrl}`}
                         className="mb-0"
                         alt={item.name}
                         loading="lazy"
                       />
+                      </div>
                       <h4>{item.name}</h4>
                     </div>
                   </div>

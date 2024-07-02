@@ -158,6 +158,9 @@ padding: 15px 0;*/
 input {
   background-color: #FFE5E5 !important;
 }
+.form-control {
+  background-color: #fcfcfc !important;
+}
 
 .text-with-line {
   position: relative;
@@ -3057,6 +3060,14 @@ a {
   text-align: center;
   width: 300px;
 }
+.card-in {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+ 
+}
 
 
 .card2 {
@@ -3673,7 +3684,8 @@ animation: shine 2s infinite linear;
   color: #df4346;
   margin-left: 7px;
 }
-
-
-
+.btn-login{
+  background-color:#221a42 ;
+  color: white;
+}
 /* afreen css...............end.... */

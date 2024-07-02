@@ -8,7 +8,7 @@ import Contact from "./pages/Contact";
 import Stores from "./pages/Stores";
 import Faqs from "./pages/Faqs";
 import ShopAll from "./pages/Shopall";
-import Login from "./pages/Login";
+import Login from "./components/Login";
 import Account from "./pages/Account";
 import Awards from "./pages/Awards";
 import Allbrand from "./pages/Allbrand";
